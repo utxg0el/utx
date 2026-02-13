@@ -6,13 +6,13 @@
   color-scheme: dark;
   --font-display: "Iowan Old Style", "Book Antiqua", "Palatino Linotype", Palatino, serif;
   --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --color-bg: 220 25% 10%;
-  --color-panel: 220 22% 15%;
-  --color-text: 45 30% 92%;
-  --color-muted: 215 16% 72%;
-  --color-accent: 188 82% 66%;
-  --color-accent-soft: 188 70% 24%;
-  --color-border: 220 16% 26%;
+  --color-bg: 220 20% 4%;
+  --color-panel: 220 20% 7%;
+  --color-text: 210 20% 92%;
+  --color-muted: 214 12% 64%;
+  --color-accent: 189 85% 68%;
+  --color-accent-soft: 189 55% 18%;
+  --color-border: 218 15% 19%;
 }
 
 .light {
@@ -48,12 +48,25 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 15% 10%, hsl(var(--color-accent) / 0.1), transparent 35%),
-    radial-gradient(circle at 88% 18%, hsl(var(--color-accent) / 0.08), transparent 30%),
+    radial-gradient(circle at 16% 8%, hsl(var(--color-accent) / 0.08), transparent 34%),
+    radial-gradient(circle at 90% 14%, hsl(var(--color-accent) / 0.04), transparent 28%),
+    linear-gradient(110deg, hsl(var(--color-bg)), hsl(222 22% 5%)),
+    repeating-linear-gradient(
+      -45deg,
+      hsl(var(--color-text) / 0.015) 0px,
+      hsl(var(--color-text) / 0.015) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
     hsl(var(--color-bg));
   color: hsl(var(--color-text));
   font-family: var(--font-body), sans-serif;
   min-height: 100vh;
+}
+
+::selection {
+  background: hsl(var(--color-accent) / 0.25);
+  color: hsl(var(--color-text));
 }
 
 .section-anchor {

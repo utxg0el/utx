@@ -1,4 +1,4 @@
-name: Deployment Checks
+npm run buildname: Deployment Checks
 
 on:
   pull_request:
