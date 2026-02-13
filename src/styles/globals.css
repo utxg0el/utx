@@ -4,6 +4,8 @@
 
 :root {
   color-scheme: dark;
+  --font-display: "Iowan Old Style", "Book Antiqua", "Palatino Linotype", Palatino, serif;
+  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --color-bg: 220 25% 10%;
   --color-panel: 220 22% 15%;
   --color-text: 45 30% 92%;
