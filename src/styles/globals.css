@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --color-bg: 220 25% 10%;
+  --color-panel: 220 22% 15%;
+  --color-text: 45 30% 92%;
+  --color-muted: 215 16% 72%;
+  --color-accent: 188 82% 66%;
+  --color-accent-soft: 188 70% 24%;
+  --color-border: 220 16% 26%;
+}
+
+.light {
+  color-scheme: light;
+  --color-bg: 42 45% 96%;
+  --color-panel: 44 40% 99%;
+  --color-text: 226 29% 14%;
+  --color-muted: 223 14% 39%;
+  --color-accent: 190 70% 40%;
+  --color-accent-soft: 190 65% 89%;
+  --color-border: 214 20% 83%;
+}
+
+* {
+  border-color: hsl(var(--color-border) / 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 10%, hsl(var(--color-accent) / 0.1), transparent 35%),
+    radial-gradient(circle at 88% 18%, hsl(var(--color-accent) / 0.08), transparent 30%),
+    hsl(var(--color-bg));
+  color: hsl(var(--color-text));
+  font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+}
+
+.section-anchor {
+  scroll-margin-top: 96px;
+}
