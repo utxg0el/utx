@@ -10,13 +10,32 @@ type ProjectsGridProps = {
 
 export function ProjectsGrid({ projects, activeDomain }: ProjectsGridProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="max-w-3xl space-y-6">
       {projects.map((project) => {
+        const summary = `${project.oneLiner} ${project.details}`.trim();
+
         return (
-          <article key={project.name} className="rounded-xl border border-border bg-panel/85 p-5 transition">
-            <h3 className="font-display text-2xl text-text">{project.name}</h3>
-            <p className="mt-2 text-sm text-text">{project.oneLiner}</p>
-            <p className="mt-2 text-sm text-muted">{project.details}</p>
+          <article key={project.name} className="draft-row transition">
+            {project.imageUrl ? (
+              <a href={project.links?.[0]?.href ?? project.imageUrl} target="_blank" rel="noreferrer">
+                <img
+                  src={project.imageUrl}
+                  alt={`${project.name} project preview`}
+                  className="h-32 w-full rounded-md object-cover"
+                  loading="lazy"
+                />
+              </a>
+            ) : null}
+            <h3 className="mt-3 font-display text-2xl text-text">
+              {project.links?.[0] ? (
+                <a href={project.links[0].href} target="_blank" rel="noreferrer" className="hover:text-accent">
+                  {project.name}
+                </a>
+              ) : (
+                project.name
+              )}
+            </h3>
+            <p className="two-line-clamp mt-2 text-sm leading-relaxed text-muted">{summary}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.domains.map((domain) => {
                 const highlighted = activeDomain === domain;
@@ -25,22 +44,13 @@ export function ProjectsGrid({ projects, activeDomain }: ProjectsGridProps) {
                   <span
                     key={`${project.name}-${domain}`}
                     className={`rounded-full border px-2.5 py-1 text-xs ${
-                      highlighted
-                        ? "border-accent/60 bg-accent/15 text-text"
-                        : "border-border bg-bg/50 text-muted"
+                      highlighted ? "draft-pill-active" : "draft-pill"
                     }`}
                   >
                     {domainLabel[domain]}
                   </span>
                 );
               })}
-            </div>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {project.chips.map((chip) => (
-                <span key={`${project.name}-${chip}`} className="rounded-full bg-bg px-2 py-1 text-xs text-muted">
-                  {chip}
-                </span>
-              ))}
             </div>
           </article>
         );

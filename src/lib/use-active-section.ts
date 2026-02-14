@@ -8,28 +8,40 @@ export function useActiveSection(sectionIds: string[]) {
   useEffect(() => {
     if (!sectionIds.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const pickActive = () => {
+      const marker = 110; // Keeps active state aligned with sticky nav offset.
+      const candidates = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((node): node is HTMLElement => Boolean(node));
 
-        if (visible[0]?.target.id) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-40% 0px -45% 0px",
-        threshold: [0.2, 0.4, 0.6, 0.8]
+      if (!candidates.length) return;
+
+      const inView = candidates.filter((node) => {
+        const rect = node.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom >= marker;
+      });
+
+      if (inView.length) {
+        setActiveSection(inView[inView.length - 1].id);
+        return;
       }
-    );
 
-    sectionIds.forEach((id) => {
-      const node = document.getElementById(id);
-      if (node) observer.observe(node);
-    });
+      const passed = candidates.filter((node) => node.getBoundingClientRect().top < marker);
+      if (passed.length) {
+        setActiveSection(passed[passed.length - 1].id);
+        return;
+      }
 
-    return () => observer.disconnect();
+      setActiveSection(candidates[0].id);
+    };
+
+    pickActive();
+    window.addEventListener("scroll", pickActive, { passive: true });
+    window.addEventListener("resize", pickActive);
+    return () => {
+      window.removeEventListener("scroll", pickActive);
+      window.removeEventListener("resize", pickActive);
+    };
   }, [sectionIds]);
 
   return activeSection;

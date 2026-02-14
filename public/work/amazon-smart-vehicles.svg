@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Amazon Smart Vehicles illustration">
+  <defs>
+    <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c1117"/>
+      <stop offset="100%" stop-color="#1c2734"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7cc3ff"/>
+      <stop offset="100%" stop-color="#b2e3ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgA)"/>
+  <circle cx="930" cy="180" r="180" fill="#1f3c5c" opacity="0.35"/>
+  <circle cx="240" cy="510" r="220" fill="#172a40" opacity="0.45"/>
+
+  <path d="M100 430 C260 350, 920 350, 1100 430" stroke="#324c67" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M180 468 C330 408, 860 408, 1020 468" stroke="#3f5f7e" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <rect x="338" y="186" width="524" height="204" rx="22" fill="#0f1720" stroke="#3c5e80" stroke-width="2"/>
+  <rect x="370" y="222" width="460" height="132" rx="14" fill="#15212d" stroke="#27405a" stroke-width="2"/>
+
+  <path d="M410 289 C470 224, 520 348, 580 284 C640 224, 690 348, 750 284" stroke="url(#wave)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="804" cy="289" r="18" fill="#9ad8ff"/>
+  <circle cx="804" cy="289" r="8" fill="#1a2d42"/>
+
+  <path d="M258 430 C330 370, 880 370, 942 430 L942 466 L258 466 Z" fill="#0b1219" stroke="#4f6f91" stroke-width="2"/>
+  <circle cx="356" cy="470" r="34" fill="#152231" stroke="#698ab0" stroke-width="2"/>
+  <circle cx="846" cy="470" r="34" fill="#152231" stroke="#698ab0" stroke-width="2"/>
+  <circle cx="356" cy="470" r="15" fill="#0a0f15"/>
+  <circle cx="846" cy="470" r="15" fill="#0a0f15"/>
+
+  <text x="88" y="108" fill="#d8e9ff" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="700">Amazon Smart Vehicles</text>
+  <text x="88" y="154" fill="#9db8d4" font-size="24" font-family="Inter, Arial, sans-serif">LLM orchestration for in-car assistant actions</text>
+</svg>

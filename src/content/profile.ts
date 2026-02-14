@@ -10,14 +10,22 @@ export type SocialLink = {
   href: string;
 };
 
+export type LinkItem = {
+  label: string;
+  href: string;
+};
+
 export type WorkItem = {
   company: string;
   role: string;
   period: string;
   location: string;
+  imageUrl?: string;
+  imageAlt?: string;
   impactBullets: string[];
   stack: string[];
   domains: ProjectDomain[];
+  links?: LinkItem[];
 };
 
 export type ProjectItem = {
@@ -26,7 +34,8 @@ export type ProjectItem = {
   details: string;
   chips: string[];
   domains: ProjectDomain[];
-  links?: { label: string; href: string }[];
+  links?: LinkItem[];
+  imageUrl?: string;
 };
 
 export type CourseItem = {
@@ -46,13 +55,7 @@ export type EducationInfo = {
   school: string;
   degree: string;
   status: string;
-  gpa: string;
   note?: string;
-};
-
-export type CultureItem = {
-  category: string;
-  items: string[];
 };
 
 export type SiteProfile = {
@@ -61,6 +64,7 @@ export type SiteProfile = {
   location: string;
   summary: string;
   resumeUrl: string;
+  avatarUrl: string;
   sections: SectionNavItem[];
   socials: SocialLink[];
   education: EducationInfo;
@@ -68,7 +72,6 @@ export type SiteProfile = {
   work: WorkItem[];
   projects: ProjectItem[];
   coursework: CourseItem[];
-  culture: CultureItem[];
 };
 
 export const domainLabel: Record<ProjectDomain, string> = {
@@ -80,134 +83,187 @@ export const domainLabel: Record<ProjectDomain, string> = {
 
 export const profile: SiteProfile = {
   name: "Utkarsh Goel",
-  title: "Applied AI/ML Engineer",
+  title: "MS CS @ NYU Courant | Applied AI/ML Engineer",
   location: "New York, NY",
   summary:
-    "MS CS candidate at NYU Courant (Semester 2) focused on LLM agents, efficient AI systems, and robotics perception with production and research execution.",
+    "Second-semester MS CS student at NYU Courant building LLM systems, efficient AI, and robotics perception. Actively looking for internship and full-time opportunities. Love books, movies, and podcasts of all kinds!",
   resumeUrl: "/Utkarsh_CV.pdf",
+  avatarUrl: "/profile/utkarsh-mall.png",
   sections: [
     { id: "work", label: "Work" },
     { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
-    { id: "education", label: "Education" },
-    { id: "culture", label: "Culture" },
-    { id: "contact", label: "Contact" }
+    { id: "education", label: "Education" }
   ],
   socials: [
     { label: "GitHub", href: "https://github.com/utxg0el" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/utkarshgoel2001/" }
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/utkarshgoel2001/" },
+    { label: "Email", href: "mailto:goelutk2001@gmail.com" }
   ],
   education: {
     school: "New York University Courant Institute of Mathematical Sciences",
     degree: "MS in Computer Science",
-    status: "Semester 2",
-    gpa: "3.5+ (Semester 1)",
-    note: "Advanced graduate coursework spanning theory, machine learning, and systems."
+    status: "Semester 2 (Spring 2026)"
   },
   skills: [
     {
       category: "AI/ML",
-      items: ["LLM pretraining", "RL for reasoning", "agentic orchestration", "statistical ML"]
+      items: ["LLM systems", "RL for reasoning", "agentic orchestration", "PyTorch"]
     },
     {
       category: "Efficient AI",
-      items: ["CUDA", "quantization", "low-rank optimization", "KV caching", "inference optimization"]
+      items: ["CUDA", "quantization", "low-rank optimization", "inference optimization"]
     },
     {
       category: "Vision/Robotics",
       items: ["CoTracker", "FoundationPose", "SAM2", "Depth Anything", "HAMER", "optical flow"]
     },
     {
-      category: "Systems",
-      items: ["production APIs", "tool orchestration", "distributed systems fundamentals"]
+      category: "Systems/Data",
+      items: ["Java + Spring", "microservices", "AWS", "Apache Airflow", "PostgreSQL", "Tableau", "Selenium"]
     }
   ],
   work: [
     {
       company: "Amazon Smart Vehicles",
-      role: "Software Development Engineer",
-      period: "2023 - 2024",
+      role: "Software Development Engineer 1",
+      period: "Jan 2024 - Jul 2025",
       location: "Bengaluru, India",
+      imageUrl: "/work/amazon-smart-vehicles.svg",
+      imageAlt: "Illustration of in-car assistant orchestration for Amazon Smart Vehicles",
       impactBullets: [
-        "Part of the first 3-engineer team that migrated Alexa Smart Vehicles from rigid FST command handling to a dynamic LLM-based architecture.",
-        "Built agent behavior for real-time input understanding plus API/tool orchestration, effectively giving the assistant practical autonomy for multi-step tasks.",
-        "Helped take the concept from hackathon demo to productionized direction after interest from OEMs including Audi, Rivian, and Mahindra."
+        "On a 3-engineer team that moved Alexa Smart Vehicles from FSM/FST to an LLM-based architecture.",
+        "Built service logic for real-time intent handling and tool/API orchestration for multi-step vehicle actions.",
+        "Helped productionize the platform with OEM-facing integrations."
       ],
-      stack: ["LLM agents", "tool orchestration", "distributed services", "production infra"],
-      domains: ["llm_agents", "efficient_ai"]
+      stack: ["LLM systems", "microservices"],
+      domains: ["llm_agents", "efficient_ai"],
+      links: [
+        { label: "Amazon", href: "https://www.amazon.com/" },
+        { label: "Alexa Auto", href: "https://www.amazon.com/alexa-auto/b?ie=UTF8&node=18021383011" },
+        { label: "Audi", href: "https://www.audi.com/" },
+        { label: "Rivian", href: "https://rivian.com/" },
+        { label: "Mahindra", href: "https://www.mahindra.com/" }
+      ]
+    },
+    {
+      company: "timelyAI (now Zoca)",
+      role: "Product Analyst and Data Science Intern",
+      period: "Jul 2023 - Dec 2023",
+      location: "Bengaluru, India",
+      imageUrl: "/work/zoca-analytics.svg",
+      imageAlt: "Illustration of analytics and growth dashboard pipelines for Zoca",
+      impactBullets: [
+        "Built an analytics stack with Python pipelines and Node.js backend, contributing to 50% MoM DAU growth.",
+        "Automated QA with Python + Selenium, cutting manual testing by 30%.",
+        "Built dashboards and growth experiments that contributed to 20% SMB revenue growth."
+      ],
+      stack: ["analytics", "data pipelines"],
+      domains: ["efficient_ai"],
+      links: [{ label: "Zoca", href: "https://www.zoca.ai/" }]
     },
     {
       company: "EliteFit.AI",
-      role: "Machine Learning Engineer",
-      period: "2022 - 2023",
+      role: "Data Scientist Intern",
+      period: "Aug 2022 - Jun 2023",
       location: "Singapore",
+      imageUrl: "/work/elitefit-vision.svg",
+      imageAlt: "Illustration of pose normalization and optical-flow pipeline for EliteFit",
       impactBullets: [
-        "Integrated a normalization transform stage into the vision pipeline so model input stayed robust across varying camera angles before inference.",
-        "Built optical-flow-based frame detection handling up to 25 degrees of pan/zoom variation with F1 score of 0.98.",
-        "Developed a body-part weighting repository from open datasets to dynamically feature-engineer parameters for stronger similarity scoring and feedback quality."
+        "Built vision normalization and frame-alignment logic to handle camera-angle variance before inference.",
+        "Implemented optical-flow frame detection robust to 25 degrees pan/zoom variation (F1: 0.98).",
+        "Engineered body-part weighted features to improve real-time similarity scoring."
       ],
-      stack: ["computer vision", "optical flow", "feature engineering", "ML pipelines"],
-      domains: ["robotics_perception", "efficient_ai"]
+      stack: ["computer vision", "ML pipelines"],
+      domains: ["robotics_perception", "efficient_ai"],
+      links: [{ label: "EliteFit.AI", href: "https://elitefit.ai/" }]
     }
   ],
   projects: [
     {
-      name: "LLM Pretraining + RL CoT Reasoning (100M params)",
-      oneLiner: "Built and pretrained a 100M-parameter LLM and ran RL-based chain-of-thought reasoning experiments.",
-      details:
-        "Designed training and evaluation loops for compact-model reasoning while balancing quality, stability, and efficiency constraints.",
-      chips: ["pretraining", "RL", "reasoning", "evaluation"],
-      domains: ["theory", "llm_agents", "efficient_ai"]
+      name: "Pico LLM: 100M Pretraining + RL CoT",
+      oneLiner: "Built and pretrained a 100M-parameter LLM with RL-based CoT reasoning experiments.",
+      details: "Designed compact training and evaluation loops for stable reasoning performance.",
+      chips: ["LLM pretraining", "RL reasoning"],
+      domains: ["theory", "llm_agents", "efficient_ai"],
+      imageUrl: "https://opengraph.githubassets.com/1/anushreebhat2001/pico-llm",
+      links: [
+        { label: "GitHub Repo", href: "https://github.com/anushreebhat2001/pico-llm" },
+        { label: "GitHub Profile", href: "https://github.com/utxg0el" }
+      ]
     },
     {
-      name: "Robotics Perception Layer @ AI4CE Lab, NYU",
+      name: "AI4CE Robotics Perception Layer",
       oneLiner:
-        "Built a perception stack on the Apple EgoDex dataset using CoTracker, FoundationPose, SAM2, Depth Anything, and HAMER.",
-      details:
-        "Integrated multiple foundation models into one practical robotics perception layer for embodied object and hand understanding.",
-      chips: ["SAM2", "Depth Anything", "FoundationPose", "CoTracker", "HAMER"],
-      domains: ["robotics_perception", "efficient_ai"]
+        "Built a perception layer for robotics on the Apple EgoDex dataset using CoTracker, FoundationPose, SAM2, Depth Anything, and HAMER.",
+      details: "Integrated foundation models for embodied object and hand understanding.",
+      chips: ["robotics perception", "foundation models"],
+      domains: ["robotics_perception", "efficient_ai"],
+      imageUrl: "https://opengraph.githubassets.com/1/utxg0el/egodexrobotics",
+      links: [{ label: "GitHub Repo", href: "https://github.com/utxg0el/egodexrobotics" }]
+    },
+    {
+      name: "Balanced Spiking Networks for Predictive Coding (Ongoing)",
+      oneLiner: "Building a novel spiking-network approach for predictive coding with Max Kanwal at Stanford.",
+      details: "Extending balanced spiking-network ideas for biologically plausible error propagation.",
+      chips: ["spiking networks", "predictive coding"],
+      domains: ["theory", "efficient_ai"],
+      imageUrl: "https://opengraph.githubassets.com/1/utxg0el/balanced-spiking-networks-pc",
+      links: [
+        { label: "Project Repo", href: "https://github.com/utxg0el/balanced-spiking-networks-pc" },
+        {
+          label: "Reference Paper",
+          href: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003258"
+        }
+      ]
     },
     {
       name: "In-class LLM Build (NYU ML coursework)",
       oneLiner: "Built an end-to-end LLM implementation in NYU graduate machine learning coursework.",
-      details:
-        "Covered model foundations, optimization tradeoffs, and practical training decisions under realistic constraints.",
-      chips: ["ML systems", "model training", "optimization"],
-      domains: ["theory", "llm_agents"]
+      details: "Built in Prof. Matus Telgarsky's class with focus on optimization and training tradeoffs.",
+      chips: ["ML systems", "optimization"],
+      domains: ["theory", "llm_agents"],
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/16/New_York_University_Seal.svg",
+      links: [{ label: "NYU Courant", href: "https://www.courant.nyu.edu/" }]
     }
   ],
   coursework: [
     {
-      course: "Quantum Computing (PhD level)",
+      course: "Quantum Computing (PhD)",
       level: "Graduate",
       instructor: "Prof. Omer Regev",
-      term: "NYU Courant - Semester 1"
+      term: "NYU Courant - Semester 1 (Fall 2025)"
     },
     {
       course: "Machine Learning",
       level: "Graduate",
       instructor: "Prof. Matus Telgarsky",
-      term: "NYU Courant - Semester 1",
+      term: "NYU Courant - Semester 1 (Fall 2025)",
       note: "Built an LLM as part of coursework."
     },
     {
-      course: "Honors Algorithms (PhD level)",
+      course: "Honors Analysis of Algorithms (PhD)",
       level: "Graduate",
       instructor: "Prof. Subhash Khot",
-      term: "NYU Courant - Semester 1"
+      term: "NYU Courant - Semester 1 (Fall 2025)"
     },
     {
-      course: "Operating Systems, Programming Languages, Efficient AI / AI Accelerators",
+      course: "Operating Systems",
       level: "Graduate",
-      instructor: "Prof. Sai Zhang (Efficient AI)",
-      term: "NYU Courant - Semester 2",
+      instructor: "NYU Courant",
+      term: "NYU Courant - Semester 2 (Spring 2026)"
+    },
+    {
+      course: "Programming Languages",
+      level: "Graduate",
+      instructor: "NYU Courant",
+      term: "NYU Courant - Semester 2 (Spring 2026)"
+    },
+    {
+      course: "AI Accelerators / Efficient AI",
+      level: "Graduate",
+      instructor: "NYU Courant",
+      term: "NYU Courant - Semester 2 (Spring 2026)",
       note: "CUDA + low-rank methods + quantization + KV caching + hardware-aware optimization."
     }
-  ],
-  culture: [
-    { category: "Books", items: ["Dostoevsky", "Camus", "Philosophy of science"] },
-    { category: "Cinema", items: ["Character-driven films", "Moral tension", "Dry dialogue"] },
-    { category: "Ideas", items: ["First principles", "Hardware futures", "Deadpan comedy"] }
   ]
 };

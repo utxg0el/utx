@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Zoca analytics platform illustration">
+  <defs>
+    <linearGradient id="bgZ" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1722"/>
+      <stop offset="100%" stop-color="#1a1030"/>
+    </linearGradient>
+    <linearGradient id="rise" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#48b6ff"/>
+      <stop offset="100%" stop-color="#b58bff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgZ)"/>
+  <circle cx="970" cy="120" r="180" fill="#352159" opacity="0.42"/>
+  <circle cx="250" cy="540" r="220" fill="#18344f" opacity="0.35"/>
+
+  <text x="84" y="108" fill="#f0e9ff" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="700">timelyAI / Zoca</text>
+  <text x="84" y="152" fill="#b7c8dc" font-size="24" font-family="Inter, Arial, sans-serif">Analytics, QA automation, and growth dashboards</text>
+
+  <rect x="90" y="192" width="720" height="360" rx="20" fill="#0e1c2b" stroke="#3a536d" stroke-width="2"/>
+  <rect x="126" y="230" width="300" height="130" rx="12" fill="#142636" stroke="#2e4962" stroke-width="2"/>
+  <rect x="448" y="230" width="326" height="130" rx="12" fill="#142636" stroke="#2e4962" stroke-width="2"/>
+  <rect x="126" y="384" width="648" height="132" rx="12" fill="#142636" stroke="#2e4962" stroke-width="2"/>
+
+  <path d="M154 328 L214 286 L278 300 L340 254 L400 278" stroke="url(#rise)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="154" cy="328" r="6" fill="#8fd4ff"/>
+  <circle cx="214" cy="286" r="6" fill="#8fd4ff"/>
+  <circle cx="278" cy="300" r="6" fill="#8fd4ff"/>
+  <circle cx="340" cy="254" r="6" fill="#8fd4ff"/>
+  <circle cx="400" cy="278" r="6" fill="#8fd4ff"/>
+
+  <rect x="480" y="264" width="54" height="64" rx="8" fill="#5ac2ff"/>
+  <rect x="548" y="238" width="54" height="90" rx="8" fill="#7aa8ff"/>
+  <rect x="616" y="214" width="54" height="114" rx="8" fill="#9e93ff"/>
+  <rect x="684" y="248" width="54" height="80" rx="8" fill="#6cb4ff"/>
+
+  <rect x="858" y="240" width="250" height="140" rx="16" fill="#111f30" stroke="#35506b" stroke-width="2"/>
+  <circle cx="902" cy="282" r="22" fill="#7db5ff"/>
+  <path d="M944 270 h130" stroke="#9db5cf" stroke-width="8" stroke-linecap="round"/>
+  <path d="M944 300 h92" stroke="#7088a5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M944 328 h110" stroke="#7088a5" stroke-width="8" stroke-linecap="round"/>
+
+  <path d="M878 454 h200" stroke="#3f5a75" stroke-width="10" stroke-linecap="round"/>
+  <path d="M878 488 h166" stroke="#3f5a75" stroke-width="10" stroke-linecap="round"/>
+</svg>

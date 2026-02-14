@@ -1,11 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: dark;
-  --font-display: "Iowan Old Style", "Book Antiqua", "Palatino Linotype", Palatino, serif;
-  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Inter", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   --color-bg: 220 20% 4%;
   --color-panel: 220 20% 7%;
   --color-text: 210 20% 92%;
@@ -13,17 +15,7 @@
   --color-accent: 189 85% 68%;
   --color-accent-soft: 189 55% 18%;
   --color-border: 218 15% 19%;
-}
-
-.light {
-  color-scheme: light;
-  --color-bg: 42 45% 96%;
-  --color-panel: 44 40% 99%;
-  --color-text: 226 29% 14%;
-  --color-muted: 223 14% 39%;
-  --color-accent: 190 70% 40%;
-  --color-accent-soft: 190 65% 89%;
-  --color-border: 214 20% 83%;
+  --draft-background: linear-gradient(180deg, hsl(var(--color-bg)), hsl(var(--color-bg)));
 }
 
 * {
@@ -47,18 +39,7 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(circle at 16% 8%, hsl(var(--color-accent) / 0.08), transparent 34%),
-    radial-gradient(circle at 90% 14%, hsl(var(--color-accent) / 0.04), transparent 28%),
-    linear-gradient(110deg, hsl(var(--color-bg)), hsl(222 22% 5%)),
-    repeating-linear-gradient(
-      -45deg,
-      hsl(var(--color-text) / 0.015) 0px,
-      hsl(var(--color-text) / 0.015) 1px,
-      transparent 1px,
-      transparent 14px
-    ),
-    hsl(var(--color-bg));
+  background: hsl(0 0% 1%);
   color: hsl(var(--color-text));
   font-family: var(--font-body), sans-serif;
   min-height: 100vh;
@@ -71,4 +52,118 @@ body {
 
 .section-anchor {
   scroll-margin-top: 96px;
+}
+
+.draft-shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--draft-background);
+  color: hsl(var(--color-text));
+  font-family: var(--font-body), sans-serif;
+}
+
+.draft-nav {
+  border-bottom: 1px solid hsl(var(--color-border) / 0.74);
+  background: hsl(var(--color-bg) / 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.draft-panel {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.draft-paper {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.draft-button-primary {
+  border: 1px solid hsl(var(--color-border) / 0.9);
+  background: transparent;
+  color: hsl(var(--color-text));
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.draft-button-primary:hover {
+  border-color: hsl(var(--color-accent) / 0.6);
+  color: hsl(var(--color-accent));
+}
+
+.draft-button-secondary {
+  border: 1px solid hsl(var(--color-border) / 0.9);
+  background: hsl(var(--color-panel) / 0.7);
+  color: hsl(var(--color-text));
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.draft-button-secondary:hover {
+  border-color: hsl(var(--color-accent) / 0.52);
+  color: hsl(var(--color-accent));
+}
+
+.draft-pill {
+  border: 1px solid hsl(var(--color-border) / 0.9);
+  background: hsl(var(--color-bg) / 0.55);
+  color: hsl(var(--color-muted));
+}
+
+.draft-pill-active {
+  border: 1px solid hsl(var(--color-accent) / 0.72);
+  background: hsl(var(--color-accent-soft) / 0.62);
+  color: hsl(var(--color-text));
+}
+
+.draft-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--color-border) / 0.5) 15%,
+    hsl(var(--color-border) / 0.5) 85%,
+    transparent 100%
+  );
+}
+
+.draft-row {
+  border-bottom: 1px solid hsl(var(--color-border) / 0.55);
+  padding-bottom: 1.8rem;
+}
+
+.draft-note {
+  border-left: 1px solid hsl(var(--color-border) / 0.7);
+  padding-left: 0.85rem;
+}
+
+.two-line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.draft-module {
+  border: 1px solid hsl(var(--color-border) / 0.45);
+  border-radius: 12px;
+  background: hsl(var(--color-panel) / 0.32);
+}
+
+.draft-signal {
+  --font-display: "Inter", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --color-bg: 0 0% 1%;
+  --color-panel: 0 0% 5%;
+  --color-text: 0 0% 92%;
+  --color-muted: 0 0% 60%;
+  --color-accent: 0 0% 80%;
+  --color-accent-soft: 0 0% 14%;
+  --color-border: 0 0% 16%;
+  --draft-background: linear-gradient(180deg, hsl(0 0% 1%), hsl(0 0% 1%));
+}
+
+.draft-signal .draft-panel {
+  background: transparent;
 }

@@ -43,7 +43,7 @@ export function ConstellationMap({ activeDomain, onDomainSelect }: Constellation
   const tooltipPoint = current ? pointByDomain[current] : null;
 
   return (
-    <div className="relative rounded-xl border border-border bg-panel/70 p-4 md:p-6">
+    <div className="draft-module relative p-4 md:p-6">
       <p className="mb-3 text-xs uppercase tracking-[0.2em] text-muted">Signature Map</p>
       <svg viewBox="0 0 320 220" className="h-auto w-full" role="img" aria-label="Constellation map of project domains">
         <defs>
@@ -116,7 +116,7 @@ export function ConstellationMap({ activeDomain, onDomainSelect }: Constellation
         <div
           id="constellation-tooltip"
           role="tooltip"
-          className={`pointer-events-none absolute z-10 -translate-x-1/2 rounded-md border border-border bg-bg/95 px-2.5 py-1 text-xs text-text shadow-glow ${
+          className={`pointer-events-none absolute z-10 -translate-x-1/2 rounded-md border border-border bg-bg/95 px-2.5 py-1 text-xs text-text ${
             reduceMotion ? "" : "transition-opacity"
           }`}
           style={{
@@ -131,12 +131,12 @@ export function ConstellationMap({ activeDomain, onDomainSelect }: Constellation
       {current ? (
         <div
           role="status"
-          className={`mt-3 rounded-md border border-border bg-bg/80 px-3 py-2 text-sm text-text ${
+          className={`mt-3 border-l border-border/70 pl-3 text-sm text-text ${
             reduceMotion ? "" : "transition"
           }`}
         >
           <span className="font-medium">{domainLabel[current]}</span>
-          <span className="text-muted"> - click to filter related work and projects.</span>
+          <span className="text-muted"> | click to filter related work and projects.</span>
         </div>
       ) : (
         <p className="mt-3 text-sm text-muted">Select a node to filter related work and projects.</p>
