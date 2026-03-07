@@ -14,7 +14,7 @@ export function StickyNav({ sections }: StickyNavProps) {
   return (
     <header className="draft-nav sticky top-0 z-50">
       <nav className="mx-auto max-w-6xl px-2 py-3 md:px-8">
-        <ul className="flex items-center justify-start gap-1 overflow-x-auto whitespace-nowrap px-2 md:justify-center md:gap-2">
+        <ul className="flex flex-wrap items-center justify-center gap-1 px-2 md:gap-2">
           {sections.map((section) => {
             const isActive = activeSection === section.id;
             return (
