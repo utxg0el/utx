@@ -83,10 +83,10 @@ export const domainLabel: Record<ProjectDomain, string> = {
 
 export const profile: SiteProfile = {
   name: "Utkarsh Goel",
-  title: "MS CS @ NYU Courant | Applied AI/ML Engineer",
+  title: "Applied AI/ML Engineer — NYU Courant",
   location: "New York, NY",
   summary:
-    "Second-semester MS CS student at NYU Courant building LLM systems, efficient AI, and robotics perception. Actively looking for internship and full-time opportunities. Love books, movies, and podcasts of all kinds!",
+    "MS CS at NYU Courant. Before grad school: 18 months at Amazon moving Alexa Smart Vehicles from rule-based FSMs to LLM architecture. Now building in LLM systems, robotics perception, and efficient AI. Open to internship and full-time roles.",
   resumeUrl: "/Utkarsh_CV.pdf",
   avatarUrl: "/profile/utkarsh-mall.png",
   sections: [

@@ -44,7 +44,6 @@ export function ConstellationMap({ activeDomain, onDomainSelect }: Constellation
 
   return (
     <div className="draft-module relative p-4 md:p-6">
-      <p className="mb-3 text-xs uppercase tracking-[0.2em] text-muted">Signature Map</p>
       <svg viewBox="0 0 320 220" className="h-auto w-full" role="img" aria-label="Constellation map of project domains">
         <defs>
           <filter id="lineGlow" x="-30%" y="-30%" width="160%" height="160%">
@@ -131,15 +130,15 @@ export function ConstellationMap({ activeDomain, onDomainSelect }: Constellation
       {current ? (
         <div
           role="status"
-          className={`mt-3 border-l border-border/70 pl-3 text-sm text-text ${
+          className={`mt-3 border-l border-accent/50 pl-3 text-sm ${
             reduceMotion ? "" : "transition"
           }`}
         >
-          <span className="font-medium">{domainLabel[current]}</span>
-          <span className="text-muted"> | click to filter related work and projects.</span>
+          <span className="font-medium text-text">{domainLabel[current]}</span>
+          <span className="text-muted"> — click to filter</span>
         </div>
       ) : (
-        <p className="mt-3 text-sm text-muted">Select a node to filter related work and projects.</p>
+        <p className="mt-3 text-xs text-muted">Click a node to filter by domain.</p>
       )}
     </div>
   );

@@ -10,14 +10,13 @@ import { domainLabel, profile, type ProjectDomain } from "@/src/content/profile"
 function ProfileAccent() {
   return (
     <aside className="draft-module p-4 md:p-5">
-      <p className="text-[10px] uppercase tracking-[0.2em] text-muted">General Contact</p>
       <img
         src={profile.avatarUrl}
         alt={`${profile.name} portrait`}
-        className="mt-3 h-60 w-full rounded-md border border-border/80 object-cover object-[50%_40%] md:h-72"
+        className="h-60 w-full rounded-md border border-border/60 object-cover object-[50%_40%] md:h-72"
         loading="lazy"
       />
-      <p className="mt-3 text-sm text-muted">Actively looking for internship and full-time opportunities.</p>
+      <p className="mt-3 text-sm text-muted">Open to internship and full-time roles.</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {profile.socials.map((link) => (
           <a
@@ -89,12 +88,12 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 pb-12 pt-10 md:px-8 md:pt-14">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-muted">New York University / Courant / {profile.location}</p>
-            <h1 className="mt-3 max-w-4xl font-display text-5xl leading-[0.95] md:text-7xl">{profile.name}</h1>
-            <p className="mt-4 text-lg text-muted">{profile.title}</p>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-text/90">{profile.summary}</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-muted">{profile.location}</p>
+            <h1 className="mt-3 max-w-4xl font-display text-5xl font-semibold leading-[0.95] md:text-7xl">{profile.name}</h1>
+            <p className="mt-4 text-base text-muted">{profile.title}</p>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-text/85">{profile.summary}</p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a href="#projects" className="draft-button-primary rounded-full px-5 py-2 text-sm font-medium">
                 View Projects
               </a>
@@ -107,11 +106,6 @@ export default function HomePage() {
                 Download CV
               </a>
             </div>
-
-            <div className="draft-divider my-8" />
-            <p className="max-w-3xl text-sm text-muted">
-              Focused on production LLM systems, robotics perception, and efficient AI execution.
-            </p>
           </div>
 
           <ProfileAccent />
@@ -120,19 +114,19 @@ export default function HomePage() {
 
       <section id="work" className="section-anchor mx-auto max-w-6xl px-4 py-10 md:px-8">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="font-display text-4xl">Work</h2>
+          <h2 className="font-display text-4xl font-semibold">Work</h2>
           <div className="flex items-center gap-3">
-            <p className="text-sm text-muted">
-              {activeDomain ? `Filtered by ${domainLabel[activeDomain]}` : "Showing all work and projects"}
-            </p>
             {activeDomain ? (
-              <button
-                type="button"
-                onClick={() => setActiveDomain(null)}
-                className="rounded-full border border-border bg-panel px-3 py-1.5 text-xs text-text transition hover:border-accent/50 hover:text-accent"
-              >
-                Show all
-              </button>
+              <>
+                <p className="text-sm text-muted">Filtered: {domainLabel[activeDomain]}</p>
+                <button
+                  type="button"
+                  onClick={() => setActiveDomain(null)}
+                  className="rounded-full border border-border bg-panel px-3 py-1.5 text-xs text-text transition hover:border-accent/50 hover:text-accent"
+                >
+                  Show all
+                </button>
+              </>
             ) : null}
           </div>
         </div>
@@ -217,20 +211,19 @@ export default function HomePage() {
 
       <section id="projects" className="section-anchor mx-auto max-w-6xl px-4 py-10 md:px-8">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="font-display text-4xl">Projects</h2>
-          <p className="text-sm text-muted">
-            {(activeDomain || normalizedProjectQuery)
-              ? `${filteredProjects.length} matching ${filteredProjects.length === 1 ? "project" : "projects"}`
-              : "All domains visible"}
-          </p>
+          <h2 className="font-display text-4xl font-semibold">Projects</h2>
+          {(activeDomain || normalizedProjectQuery) ? (
+            <p className="text-sm text-muted">
+              {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}
+            </p>
+          ) : null}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(260px,320px)_minmax(0,1fr)]">
           <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
             <div className="draft-module p-4 md:p-5">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted">Project Search</p>
-              <label htmlFor="project-search" className="mt-3 block text-xs uppercase tracking-[0.14em] text-muted">
-                Search by name, tech, or topic
+              <label htmlFor="project-search" className="block text-xs uppercase tracking-[0.18em] text-muted">
+                Search
               </label>
               <input
                 id="project-search"
@@ -270,7 +263,7 @@ export default function HomePage() {
       </section>
 
       <section id="education" className="section-anchor mx-auto max-w-6xl px-4 py-10 md:px-8">
-        <h2 className="font-display text-4xl">Education</h2>
+        <h2 className="font-display text-4xl font-semibold">Education</h2>
         <p className="mt-4 text-base text-text">
           {profile.education.degree}, {profile.education.school}
         </p>
