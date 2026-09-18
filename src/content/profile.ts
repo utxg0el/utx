@@ -1,269 +1,197 @@
-export type ProjectDomain = "theory" | "llm_agents" | "efficient_ai" | "robotics_perception";
-
-export type SectionNavItem = {
-  id: string;
-  label: string;
-};
-
-export type SocialLink = {
-  label: string;
-  href: string;
-};
-
 export type LinkItem = {
   label: string;
   href: string;
 };
 
+/** Prose that can carry inline links. Rendered by <Rich /> in app/page.tsx. */
+export type RichText = (string | LinkItem)[];
+
+export type Paper = {
+  title: string;
+  authors: string;
+  venue: string;
+  status: string;
+  summary: string;
+  repo?: string;
+};
+
+export type ResearchItem = {
+  lab: string;
+  labUrl?: string;
+  advisor: string;
+  advisorUrl?: string;
+  period: string;
+  /** Paragraphs. Written for a reader who has never heard of splicing. */
+  body: string[];
+  paper?: Paper;
+};
+
 export type WorkItem = {
   company: string;
   role: string;
-  period: string;
   location: string;
-  imageUrl?: string;
-  imageAlt?: string;
-  impactBullets: string[];
-  stack: string[];
-  domains: ProjectDomain[];
-  links?: LinkItem[];
+  period: string;
+  body: string;
 };
 
 export type ProjectItem = {
   name: string;
-  oneLiner: string;
-  details: string;
-  chips: string[];
-  domains: ProjectDomain[];
-  links?: LinkItem[];
-  imageUrl?: string;
+  year: string;
+  affiliation?: string;
+  body: string;
+  repo?: string;
+  credit?: string;
 };
 
 export type CourseItem = {
   course: string;
-  level: string;
-  instructor: string;
-  term: string;
-  note?: string;
+  instructor?: string;
+  phd?: boolean;
 };
 
-export type SkillCategory = {
-  category: string;
-  items: string[];
-};
-
-export type EducationInfo = {
+export type EducationItem = {
   school: string;
   degree: string;
-  status: string;
+  period: string;
   note?: string;
+  /** Coursework belongs to a school, not to the page. */
+  coursework?: CourseItem[];
 };
 
 export type SiteProfile = {
   name: string;
-  title: string;
   location: string;
-  summary: string;
+  standing: string;
+  lede: RichText;
   resumeUrl: string;
   avatarUrl: string;
-  sections: SectionNavItem[];
-  socials: SocialLink[];
-  education: EducationInfo;
-  skills: SkillCategory[];
+  showPortrait: boolean;
+  emails: string[];
+  socials: LinkItem[];
+  research: ResearchItem[];
   work: WorkItem[];
   projects: ProjectItem[];
-  coursework: CourseItem[];
-};
-
-export const domainLabel: Record<ProjectDomain, string> = {
-  theory: "Theory",
-  llm_agents: "LLM Agents",
-  efficient_ai: "Efficient AI",
-  robotics_perception: "Robotics Perception"
+  education: EducationItem[];
+  availability: string;
 };
 
 export const profile: SiteProfile = {
   name: "Utkarsh Goel",
-  title: "Applied AI/ML Engineer — NYU Courant",
-  location: "New York, NY",
-  summary:
-    "MS CS at NYU Courant. Before grad school: 18 months at Amazon moving Alexa Smart Vehicles from rule-based FSMs to LLM architecture. Now building in LLM systems, robotics perception, and efficient AI. Open to internship and full-time roles.",
-  resumeUrl: "/Utkarsh_CV.pdf",
-  avatarUrl: "/profile/utkarsh-mall.png",
-  sections: [
-    { id: "work", label: "Work" },
-    { id: "projects", label: "Projects" },
-    { id: "education", label: "Education" }
+  location: "New York",
+  standing: "Master's student, NYU Courant",
+  lede: [
+    "I'm a master's student in computer science at NYU Courant, advised by ",
+    { label: "Professor Oded Regev", href: "https://cims.nyu.edu/~regev/" },
+    ". I work on deep learning models that predict RNA splicing (how a cell cuts RNA apart and stitches it back together). Our lab works on interpretability to understand and hypothesize biological mechanisms while also finding blind spots and limitations (then of course, publishing various improvements over SOTA models). Before NYU I spent eighteen months at Amazon, rebuilding Alexa's in-car assistant around an LLM agent-orchestrated stack."
   ],
+  resumeUrl: "/Utkarsh_Goel_Resume.pdf",
+  avatarUrl: "/profile/utkarsh-mall.png",
+  showPortrait: true,
+  emails: ["ug2084@nyu.edu", "goelutk2001@gmail.com"],
   socials: [
     { label: "GitHub", href: "https://github.com/utxg0el" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/utkarshgoel2001/" },
-    { label: "Email", href: "mailto:goelutk2001@gmail.com" }
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/utkarshgoel2001/" }
   ],
-  education: {
-    school: "New York University Courant Institute of Mathematical Sciences",
-    degree: "MS in Computer Science",
-    status: "Semester 2 (Spring 2026)"
-  },
-  skills: [
+  research: [
     {
-      category: "AI/ML",
-      items: ["LLM systems", "RL for reasoning", "agentic orchestration", "PyTorch"]
-    },
-    {
-      category: "Efficient AI",
-      items: ["CUDA", "quantization", "low-rank optimization", "inference optimization"]
-    },
-    {
-      category: "Vision/Robotics",
-      items: ["CoTracker", "FoundationPose", "SAM2", "Depth Anything", "HAMER", "optical flow"]
-    },
-    {
-      category: "Systems/Data",
-      items: ["Java + Spring", "microservices", "AWS", "Apache Airflow", "PostgreSQL", "Tableau", "Selenium"]
+      lab: "Regev Lab, NYU Courant",
+      advisor: "Oded Regev",
+      advisorUrl: "https://cims.nyu.edu/~regev/",
+      period: "May 2026 – present",
+      body: [
+        "A gene is not used end to end. The cell copies it into RNA — a string of four letters — then cuts pieces out of the copy and stitches the rest back together before building a protein, and which pieces are kept changes which protein you get. That cutting and stitching is called splicing, and deep learning models are good at predicting where the cuts fall from the letters alone.",
+        "But RNA does not stay a flat string. It folds back on itself, and a fold can bury or expose the exact spots where a cut would be made. A model that only reads letters cannot see this, and it is known to fail in one specific way because of it: on tightly folded sequences it predicts that a piece is kept when the cell in fact cuts it out."
+      ],
+      paper: {
+        title: "Folding It In: Structure-Aware Deep Splicing Models",
+        authors: "Utkarsh Goel, Arush Ramteke, Oded Regev",
+        venue: "NECB 2026 (New England Computational Biology)",
+        status: "Accepted",
+        summary:
+          "Alongside the letters we gave the model a second input: for each base, how likely it is to be left unpaired — computed by a standard folding program, not measured in a cell. At the same model size it made about 9% fewer errors, 95.8% against 95.4%, and its bias against tightly folded sequences dropped by about half. The part we care about more is whether it is right for the right reasons, so we tested it on mutations that break a fold and then repair it: our model's predictions rise and fall with the lab measurements, while SpliceAI, Pangolin and AlphaGenome miss one or both steps.",
+        repo: "https://github.com/utxg0el/OpenSpliceAI-Structure"
+      }
     }
   ],
   work: [
     {
-      company: "Amazon Smart Vehicles",
+      company: "Amazon — Alexa Automotive",
       role: "Software Development Engineer 1",
-      period: "Jan 2024 - Jul 2025",
-      location: "Bengaluru, India",
-      imageUrl: "/work/amazon-smart-vehicles.svg",
-      imageAlt: "Illustration of in-car assistant orchestration for Amazon Smart Vehicles",
-      impactBullets: [
-        "On a 3-engineer team that moved Alexa Smart Vehicles from FSM/FST to an LLM-based architecture.",
-        "Built service logic for real-time intent handling and tool/API orchestration for multi-step vehicle actions.",
-        "Helped productionize the platform with OEM-facing integrations."
-      ],
-      stack: ["LLM systems", "microservices"],
-      domains: ["llm_agents", "efficient_ai"],
-      links: [
-        { label: "Amazon", href: "https://www.amazon.com/" },
-        { label: "Alexa Auto", href: "https://www.amazon.com/alexa-auto/b?ie=UTF8&node=18021383011" },
-        { label: "Audi", href: "https://www.audi.com/" },
-        { label: "Rivian", href: "https://rivian.com/" },
-        { label: "Mahindra", href: "https://www.mahindra.com/" }
-      ]
+      location: "Bengaluru",
+      period: "Jan 2024 – Jul 2025",
+      body:
+        "Alexa's in-car assistant used to run on hand-written rules, so someone had to anticipate every phrasing and every follow-up in advance. I was one of three engineers who rebuilt it as an agent: it reads the car's live sensor data, works out which vehicle APIs to call, and chains them together to finish a request on its own. I wrote the real-time intent handling and the tool-calling layer, plus the Java and Spring Boot services behind it. It started as a hackathon demo and went to production on AWS after Audi, Rivian and Mahindra picked it up; the services I wrote now run on millions of vehicles."
     },
     {
-      company: "timelyAI (now Zoca)",
-      role: "Product Analyst and Data Science Intern",
-      period: "Jul 2023 - Dec 2023",
-      location: "Bengaluru, India",
-      imageUrl: "/work/zoca-analytics.svg",
-      imageAlt: "Illustration of analytics and growth dashboard pipelines for Zoca",
-      impactBullets: [
-        "Built an analytics stack with Python pipelines and Node.js backend, contributing to 50% MoM DAU growth.",
-        "Automated QA with Python + Selenium, cutting manual testing by 30%.",
-        "Built dashboards and growth experiments that contributed to 20% SMB revenue growth."
-      ],
-      stack: ["analytics", "data pipelines"],
-      domains: ["efficient_ai"],
-      links: [{ label: "Zoca", href: "https://www.zoca.ai/" }]
+      company: "Zoca",
+      role: "Product Analyst, Data Engineering",
+      location: "Bengaluru",
+      period: "Jul 2023 – Dec 2023",
+      body:
+        "Built the analytics stack for a sales product on my own: the Python pipelines, the Node.js backend, and the dashboards the growth team made decisions from. Also trained the model that sorted incoming leads by how likely they were to convert, and automated the regression testing."
     },
     {
       company: "EliteFit.AI",
-      role: "Data Scientist Intern",
-      period: "Aug 2022 - Jun 2023",
+      role: "Machine Learning Engineer Intern",
       location: "Singapore",
-      imageUrl: "/work/elitefit-vision.svg",
-      imageAlt: "Illustration of pose normalization and optical-flow pipeline for EliteFit",
-      impactBullets: [
-        "Built vision normalization and frame-alignment logic to handle camera-angle variance before inference.",
-        "Implemented optical-flow frame detection robust to 25 degrees pan/zoom variation (F1: 0.98).",
-        "Engineered body-part weighted features to improve real-time similarity scoring."
-      ],
-      stack: ["computer vision", "ML pipelines"],
-      domains: ["robotics_perception", "efficient_ai"],
-      links: [{ label: "EliteFit.AI", href: "https://elitefit.ai/" }]
+      period: "Aug 2022 – Jun 2023",
+      body:
+        "People film themselves exercising from whatever angle they happen to stand at, which is enough to confuse a model trained on clean video. I built the pipeline that corrects for it — up to about 25 degrees of camera pan and zoom — before the model sees a frame, reaching 0.98 F1 on frame detection across fifteen exercise categories, plus the weighting that decides which body parts matter for which exercise."
     }
   ],
   projects: [
     {
-      name: "Pico LLM: 100M Pretraining + RL CoT",
-      oneLiner: "Built and pretrained a 100M-parameter LLM with RL-based CoT reasoning experiments.",
-      details: "Designed compact training and evaluation loops for stable reasoning performance.",
-      chips: ["LLM pretraining", "RL reasoning"],
-      domains: ["theory", "llm_agents", "efficient_ai"],
-      imageUrl: "https://opengraph.githubassets.com/1/anushreebhat2001/pico-llm",
-      links: [
-        { label: "GitHub Repo", href: "https://github.com/anushreebhat2001/pico-llm" },
-        { label: "GitHub Profile", href: "https://github.com/utxg0el" }
-      ]
+      name: "Adaptive block allocation for diffusion language models",
+      year: "2026",
+      affiliation: "Efficient AI, NYU Courant",
+      body:
+        "Diffusion language models write a whole block of text at once instead of one word at a time. A bigger block is faster but comes out worse, and the size is normally fixed in advance. I trained a small network that reads the model's internal state at each block boundary and picks the next size from it. On LLaDA-8B it beats AdaBlock, the rule-based alternative, by 2.8 points on average across GSM8K, MATH and MBPP at the same compute per token.",
+      credit: "With two collaborators",
+      repo: "https://github.com/utxg0el/adaptive-block-size"
     },
     {
-      name: "AI4CE Robotics Perception Layer",
-      oneLiner:
-        "Built a perception layer for robotics on the Apple EgoDex dataset using CoTracker, FoundationPose, SAM2, Depth Anything, and HAMER.",
-      details: "Integrated foundation models for embodied object and hand understanding.",
-      chips: ["robotics perception", "foundation models"],
-      domains: ["robotics_perception", "efficient_ai"],
-      imageUrl: "https://opengraph.githubassets.com/1/utxg0el/egodexrobotics",
-      links: [{ label: "GitHub Repo", href: "https://github.com/utxg0el/egodexrobotics" }]
+      name: "Robotics perception layer",
+      year: "2026",
+      affiliation: "AI4CE Lab, NYU",
+      body:
+        "Robotics researchers want to know what the hands and objects in a video are actually doing, which normally means running five separate models and reconciling them by hand. I stitched those five — tracking, object pose, segmentation, depth and hand reconstruction — into a single pass over Apple's EgoDex footage (30 fps video with depth).",
+      repo: "https://github.com/utxg0el/egodexrobotics"
     },
     {
-      name: "Balanced Spiking Networks for Predictive Coding (Ongoing)",
-      oneLiner: "Building a novel spiking-network approach for predictive coding with Max Kanwal at Stanford.",
-      details: "Extending balanced spiking-network ideas for biologically plausible error propagation.",
-      chips: ["spiking networks", "predictive coding"],
-      domains: ["theory", "efficient_ai"],
-      imageUrl: "https://opengraph.githubassets.com/1/utxg0el/balanced-spiking-networks-pc",
-      links: [
-        { label: "Project Repo", href: "https://github.com/utxg0el/balanced-spiking-networks-pc" },
-        {
-          label: "Reference Paper",
-          href: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003258"
-        }
-      ]
-    },
-    {
-      name: "In-class LLM Build (NYU ML coursework)",
-      oneLiner: "Built an end-to-end LLM implementation in NYU graduate machine learning coursework.",
-      details: "Built in Prof. Matus Telgarsky's class with focus on optimization and training tradeoffs.",
-      chips: ["ML systems", "optimization"],
-      domains: ["theory", "llm_agents"],
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/16/New_York_University_Seal.svg",
-      links: [{ label: "NYU Courant", href: "https://www.courant.nyu.edu/" }]
+      name: "LLM pretraining with RL chain-of-thought",
+      year: "2025",
+      affiliation: "Machine Learning, NYU Courant",
+      body:
+        "A 100M-parameter language model built and trained from scratch in PyTorch — attention coded from the equations rather than imported from a library — then fine-tuned with reinforcement learning so it works problems out step by step instead of guessing an answer.",
+      repo: "https://github.com/anushreebhat2001/pico-llm"
     }
   ],
-  coursework: [
+  education: [
     {
-      course: "Quantum Computing (PhD)",
-      level: "Graduate",
-      instructor: "Prof. Omer Regev",
-      term: "NYU Courant - Semester 1 (Fall 2025)"
+      school: "New York University, Courant Institute",
+      degree: "M.S. Computer Science",
+      period: "Sep 2025 – May 2027",
+      note: "Violet Internship and Research Award, 2026",
+      coursework: [
+        { course: "Deep Learning", instructor: "Yann LeCun" },
+        {
+          course: "Mathematical Tools for Computational Neuroscience",
+          instructor: "Eero Simoncelli",
+          phd: true
+        },
+        { course: "Quantum Computing", instructor: "Oded Regev", phd: true },
+        { course: "Honors Analysis of Algorithms", instructor: "Subhash Khot", phd: true },
+        { course: "Machine Learning", instructor: "Matus Telgarsky" },
+        { course: "AI Accelerators / Efficient AI" },
+        { course: "Operating Systems" },
+        { course: "Programming Languages" }
+      ]
     },
     {
-      course: "Machine Learning",
-      level: "Graduate",
-      instructor: "Prof. Matus Telgarsky",
-      term: "NYU Courant - Semester 1 (Fall 2025)",
-      note: "Built an LLM as part of coursework."
-    },
-    {
-      course: "Honors Analysis of Algorithms (PhD)",
-      level: "Graduate",
-      instructor: "Prof. Subhash Khot",
-      term: "NYU Courant - Semester 1 (Fall 2025)"
-    },
-    {
-      course: "Operating Systems",
-      level: "Graduate",
-      instructor: "NYU Courant",
-      term: "NYU Courant - Semester 2 (Spring 2026)"
-    },
-    {
-      course: "Programming Languages",
-      level: "Graduate",
-      instructor: "NYU Courant",
-      term: "NYU Courant - Semester 2 (Spring 2026)"
-    },
-    {
-      course: "AI Accelerators / Efficient AI",
-      level: "Graduate",
-      instructor: "NYU Courant",
-      term: "NYU Courant - Semester 2 (Spring 2026)",
-      note: "CUDA + low-rank methods + quantization + KV caching + hardware-aware optimization."
+      school: "Manipal Institute of Technology",
+      degree: "B.Tech, Computer and Communication Engineering",
+      period: "Jul 2019 – May 2023"
     }
-  ]
+  ],
+  availability: "Looking for research and engineering roles from mid-2027."
 };

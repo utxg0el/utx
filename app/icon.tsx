@@ -17,10 +17,11 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0f131f",
-          color: "#6be5ed",
-          fontSize: 34,
-          fontWeight: 700
+          background: "#F9F7F3",
+          color: "#1C1A17",
+          fontSize: 30,
+          fontWeight: 500,
+          letterSpacing: -1
         }}
       >
         UG

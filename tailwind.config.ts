@@ -1,28 +1,33 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}"
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   theme: {
+    // Top-level, not extend: this drops every rounded-* and shadow-* utility from
+    // the build, so no later edit can quietly reintroduce a card.
+    borderRadius: { none: "0", DEFAULT: "0" },
+    boxShadow: { none: "none" },
     extend: {
       colors: {
-        bg: "hsl(var(--color-bg) / <alpha-value>)",
-        panel: "hsl(var(--color-panel) / <alpha-value>)",
-        text: "hsl(var(--color-text) / <alpha-value>)",
-        muted: "hsl(var(--color-muted) / <alpha-value>)",
-        accent: "hsl(var(--color-accent) / <alpha-value>)",
-        accentSoft: "hsl(var(--color-accent-soft) / <alpha-value>)",
-        border: "hsl(var(--color-border) / <alpha-value>)"
+        paper: "hsl(var(--paper) / <alpha-value>)",
+        ink: "hsl(var(--ink) / <alpha-value>)",
+        ink2: "hsl(var(--ink-2) / <alpha-value>)",
+        rule: "hsl(var(--rule) / <alpha-value>)",
+        accent: "hsl(var(--accent) / <alpha-value>)"
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
-        body: ["var(--font-body)", "sans-serif"]
+        sans: ["var(--font-sans)", "-apple-system", "Segoe UI", "Helvetica", "Arial", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
       },
-      boxShadow: {
-        glow: "0 0 0 1px hsl(var(--color-accent) / 0.3), 0 0 24px hsl(var(--color-accent) / 0.25)"
-      }
+      fontSize: {
+        meta: ["0.9375rem", { lineHeight: "1.5" }],
+        body: ["1.0625rem", { lineHeight: "1.65" }],
+        title: ["1.1875rem", { lineHeight: "1.35", letterSpacing: "-0.005em" }],
+        lede: ["1.1875rem", { lineHeight: "1.6" }],
+        name: ["2.125rem", { lineHeight: "1.15", letterSpacing: "-0.025em" }]
+      },
+      spacing: { 18: "4.5rem" },
+      maxWidth: { measure: "34rem", lede: "30rem" }
     }
   },
   plugins: []

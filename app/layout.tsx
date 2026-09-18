@@ -1,28 +1,42 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/src/components/theme-provider";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "@/src/styles/globals.css";
+
+const sans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  // 600 and 700 are load-bearing: headings request them. Omitting them silently
+  // faux-bolds every heading and flattens the whole hierarchy.
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-sans"
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-mono"
+});
+
+const description =
+  "Master's student in computer science at NYU Courant, advised by Oded Regev. Deep learning models of RNA. Previously Amazon, Alexa Automotive.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://utx.vercel.app"),
-  title: "Utkarsh Goel | Applied AI/ML Engineer",
-  description:
-    "Personal site of Utkarsh Goel - NYU Courant MS CS, focused on LLM agents, efficient AI systems, and robotics perception.",
+  title: "Utkarsh Goel",
+  description,
   openGraph: {
-    title: "Utkarsh Goel | Applied AI/ML Engineer",
-    description:
-      "Story-first portfolio featuring work in LLM agents, efficient AI optimization, and robotics perception.",
+    title: "Utkarsh Goel",
+    description,
     type: "website"
   }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-bg text-text antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
