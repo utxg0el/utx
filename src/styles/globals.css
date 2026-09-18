@@ -174,3 +174,40 @@ a:focus-visible {
     color: #555;
   }
 }
+
+.figure {
+  border: 1px solid hsl(var(--rule));
+}
+
+/* Plots are drawn in near-black ink on white and cannot be recolored for dark
+   mode without misrepresenting the data, so they keep a light surface in both
+   themes. The border stops it glowing against dark paper. */
+.figure--plot {
+  background: #fdfcfa;
+  padding: 0.875rem;
+}
+
+/* Photographs carry their own pixels; a light mat around one just looks like a
+   mistake. Border only, image bleeds to it. */
+.figure--photo {
+  line-height: 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .figure--plot {
+    background: #ece9e3;
+  }
+}
+
+/* Inline diagrams inherit ink from the page, so unlike .figure they need no
+   light surface — just breathing room and a hairline to seat them. */
+.diagram {
+  border: 1px solid hsl(var(--rule));
+  padding: 1.25rem 1rem;
+}

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { AlexaDiagram } from "@/src/components/alexa-diagram";
 import { profile, type CourseItem, type RichText } from "@/src/content/profile";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -141,6 +142,21 @@ export default function HomePage() {
                 <p className="mt-1 text-title font-semibold">{item.paper.title}</p>
                 <p className="mt-1 text-meta text-ink2">{item.paper.authors}</p>
                 <p className="mt-2.5 text-body">{item.paper.summary}</p>
+                {item.paper.figure ? (
+                  <figure className="mt-4">
+                    <div className={`figure figure--${item.paper.figure.kind}`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.paper.figure.src}
+                        alt={item.paper.figure.alt}
+                        loading="lazy"
+                      />
+                    </div>
+                    <figcaption className="mt-2 text-meta text-ink2">
+                      {item.paper.figure.caption}
+                    </figcaption>
+                  </figure>
+                ) : null}
                 {item.paper.repo ? (
                   <p className="mt-2.5">
                     <RepoLink href={item.paper.repo} />
@@ -160,6 +176,17 @@ export default function HomePage() {
               {item.role} · {item.location}
             </p>
             <p className="mt-3 text-body">{item.body}</p>
+            {item.diagram === "alexa" ? (
+              <figure className="mt-4">
+                <div className="diagram">
+                  <AlexaDiagram />
+                </div>
+                <figcaption className="mt-2 text-meta text-ink2">
+                  What changed: the rule table could only answer phrasings someone had written
+                  down in advance. The agent reads the car&apos;s state and works the request out.
+                </figcaption>
+              </figure>
+            ) : null}
           </div>
         ))}
       </Section>
@@ -185,6 +212,15 @@ export default function HomePage() {
               </p>
             ) : null}
             <p className="mt-3 text-body">{item.body}</p>
+            {item.figure ? (
+              <figure className="mt-4">
+                <div className={`figure figure--${item.figure.kind}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.figure.src} alt={item.figure.alt} loading="lazy" />
+                </div>
+                <figcaption className="mt-2 text-meta text-ink2">{item.figure.caption}</figcaption>
+              </figure>
+            ) : null}
             {item.repo ? (
               <p className="mt-2.5">
                 <RepoLink href={item.repo} />

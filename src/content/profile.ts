@@ -6,12 +6,25 @@ export type LinkItem = {
 /** Prose that can carry inline links. Rendered by <Rich /> in app/page.tsx. */
 export type RichText = (string | LinkItem)[];
 
+export type Figure = {
+  src: string;
+  alt: string;
+  /** Tells the reader what to look at. Without it the figure is decoration. */
+  caption: string;
+  /**
+   * "plot" is line art drawn in black on white and needs its own light surface
+   * in dark mode; "photo" already carries its own pixels and gets none.
+   */
+  kind: "plot" | "photo";
+};
+
 export type Paper = {
   title: string;
   authors: string;
   venue: string;
   status: string;
   summary: string;
+  figure?: Figure;
   repo?: string;
 };
 
@@ -32,6 +45,8 @@ export type WorkItem = {
   location: string;
   period: string;
   body: string;
+  /** Names an inline diagram component rather than an image asset. */
+  diagram?: "alexa";
 };
 
 export type ProjectItem = {
@@ -39,6 +54,7 @@ export type ProjectItem = {
   year: string;
   affiliation?: string;
   body: string;
+  figure?: Figure;
   repo?: string;
   credit?: string;
 };
@@ -109,6 +125,14 @@ export const profile: SiteProfile = {
         status: "Accepted",
         summary:
           "Alongside the letters we gave the model a second input: for each base, how likely it is to be left unpaired — computed by a standard folding program, not measured in a cell. At the same model size it made about 9% fewer errors, 95.8% against 95.4%, and its bias against tightly folded sequences dropped by about half. The part we care about more is whether it is right for the right reasons, so we tested it on mutations that break a fold and then repair it: our model's predictions rise and fall with the lab measurements, while SpliceAI, Pangolin and AlphaGenome miss one or both steps.",
+        figure: {
+          kind: "plot",
+          src: "/research/necb-fig1.png",
+          alt:
+            "Three panels. Left: a sequence-only model beside our model, which also takes the predicted folding as input. Middle: prediction error plotted against how tightly the sequence folds; our line is flattest. Right: measured and predicted splicing change across a stem loop broken by one mutation and repaired by a second; only our model tracks the measured curve.",
+          caption:
+            "Left, the two models: ours reads the predicted folding alongside the letters. Middle, error against how tightly a sequence folds — flatter is better, and ours is the blue line. Right, a fold broken by one mutation and repaired by a second; only ours follows the measured values in black."
+        },
         repo: "https://github.com/utxg0el/OpenSpliceAI-Structure"
       }
     }
@@ -120,7 +144,8 @@ export const profile: SiteProfile = {
       location: "Bengaluru",
       period: "Jan 2024 – Jul 2025",
       body:
-        "Alexa's in-car assistant used to run on hand-written rules, so someone had to anticipate every phrasing and every follow-up in advance. I was one of three engineers who rebuilt it as an agent: it reads the car's live sensor data, works out which vehicle APIs to call, and chains them together to finish a request on its own. I wrote the real-time intent handling and the tool-calling layer, plus the Java and Spring Boot services behind it. It started as a hackathon demo and went to production on AWS after Audi, Rivian and Mahindra picked it up; the services I wrote now run on millions of vehicles."
+        "Alexa's in-car assistant used to run on hand-written rules, so someone had to anticipate every phrasing and every follow-up in advance. I was one of three engineers who rebuilt it as an agent: it reads the car's live sensor data, works out which vehicle APIs to call, and chains them together to finish a request on its own. I wrote the real-time intent handling and the tool-calling layer, plus the Java and Spring Boot services behind it. It started as a hackathon demo and went to production on AWS after Audi, Rivian and Mahindra picked it up; the services I wrote now run on millions of vehicles.",
+      diagram: "alexa"
     },
     {
       company: "Zoca",
@@ -155,6 +180,14 @@ export const profile: SiteProfile = {
       affiliation: "AI4CE Lab, NYU",
       body:
         "Robotics researchers want to know what the hands and objects in a video are actually doing, which normally means running five separate models and reconciling them by hand. I stitched those five — tracking, object pose, segmentation, depth and hand reconstruction — into a single pass over Apple's EgoDex footage (30 fps video with depth).",
+      figure: {
+        kind: "photo",
+        src: "/research/egodex-perception.jpg",
+        alt:
+          "A frame from the pipeline: a first-person view of two hands holding a cup with the hand skeletons traced in green, a depth map of the same frame beside it, and a readout of end-effector height and tracking confidence.",
+        caption:
+          "One frame, all five models at once: hand skeletons traced on the camera view, the depth estimate beside it, and the end-effector position read off both."
+      },
       repo: "https://github.com/utxg0el/egodexrobotics"
     },
     {
