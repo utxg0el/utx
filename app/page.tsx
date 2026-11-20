@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { AlexaDiagram } from "@/src/components/alexa-diagram";
+import { Unprovable } from "@/src/components/unprovable";
 import { profile, type CourseItem, type RichText } from "@/src/content/profile";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -256,6 +257,7 @@ export default function HomePage() {
           <Inline items={[profile.location, ...contactLinks]} />
         </p>
         <p className="colophon-availability mt-1 text-meta text-ink2">{profile.availability}</p>
+        <Unprovable />
       </footer>
     </main>
   );

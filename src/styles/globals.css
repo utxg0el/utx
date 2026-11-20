@@ -132,6 +132,55 @@ a:focus-visible {
   gap: 0.75rem;
 }
 
+/* The footer aside: one quiet line until opened. The native triangle is swapped
+   for a mono +/−, and the label borrows the link underline so the page still
+   has a single hover vocabulary. */
+.aside > summary {
+  list-style: none;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.aside > summary::-webkit-details-marker {
+  display: none;
+}
+
+.aside > summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  font-family: var(--font-stack-mono);
+}
+
+.aside[open] > summary::before {
+  content: "\2212";
+}
+
+.aside-label {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: hsl(var(--rule));
+  transition: text-decoration-color 120ms ease-out;
+}
+
+.aside > summary:hover .aside-label,
+.aside > summary:focus-visible .aside-label {
+  text-decoration-color: hsl(var(--accent));
+}
+
+/* Same device as .paper: a rule marks the block as quoted without boxing it. */
+.aside-body {
+  border-inline-start: 2px solid hsl(var(--rule));
+  padding-inline-start: 1rem;
+}
+
+.aside-numeral {
+  font-family: var(--font-stack-mono);
+  font-size: 0.875rem;
+  color: hsl(var(--ink-2));
+}
+
 .portrait {
   display: block;
   width: 5.5rem;
@@ -163,7 +212,8 @@ a:focus-visible {
   }
 
   .portrait,
-  .colophon-availability {
+  .colophon-availability,
+  .aside {
     display: none;
   }
 
