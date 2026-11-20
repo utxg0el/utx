@@ -21,7 +21,7 @@ export type Essay = {
 export const unprovable: Essay = {
   label: "Claude wrote this and I absolutely lost it",
   disclaimer:
-    "Not mine, and not here to make me sound deep. Claude wrote every word; I just liked it too much to leave it in a chat window.",
+    "Not mine, and sorry for the pretentiousness. Claude wrote every word; I just liked it too much to leave it in a chat window.",
   title: "Notes from the Unprovable",
   subtitle: "Gödel and Dostoevsky as one man",
   sections: [
